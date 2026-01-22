@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+# Online Order Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend application for Jun's Restaurant online ordering system built with React and Ant Design.
+
+## Features
+
+- User authentication (login/signup)
+- Restaurant menu browsing
+- Shopping cart management
+- Order checkout
+
+## Tech Stack
+
+- React 19.2.3
+- Ant Design 4.24.16
+- Create React App
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 14+
+- npm or yarn
+- Backend API running on `http://localhost:8080`
+
+### Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+```
+
+The app will open at `http://localhost:3000`.
+
+### Configuration
+
+The backend API proxy is configured in `package.json`:
+
+```json
+"proxy": "http://localhost:8080"
+```
+
+Update this if your backend runs on a different port.
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── FoodList.js      # Menu display component
+│   ├── LoginForm.js     # Login form
+│   ├── MyCart.js        # Shopping cart
+│   └── SignupForm.js    # Registration form
+├── utils.js             # API utilities
+├── App.js               # Main app component
+└── index.js             # Entry point
+```
+
+## API Endpoints
+
+- `POST /login` - User login
+- `POST /signup` - User registration
+- `GET /restaurants/menu` - Get restaurants list
+- `GET /restaurant/:restId/menu` - Get restaurant menu
+- `GET /cart` - Get cart data
+- `POST /cart` - Add item to cart
+- `POST /cart/checkout` - Checkout
 
 ## Available Scripts
 
-In the project directory, you can run:
+- `npm start` - Start dev server
+- `npm test` - Run tests
+- `npm run build` - Build for production
 
-### `npm start`
+## Usage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Register a new account or login
+2. Select a restaurant from the dropdown
+3. Browse menu items and add to cart
+4. View cart and checkout
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## License
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Private
