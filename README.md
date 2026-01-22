@@ -9,6 +9,50 @@ Frontend application for Jun's Restaurant online ordering system built with Reac
 - Shopping cart management
 - Order checkout
 
+## Feature Details
+
+### User Authentication
+
+The app supports user registration and login. New users can create an account by providing:
+- Email address
+- Password
+- First name and last name
+
+Registered users can log in using their username and password. The authentication state is managed in the main App component, which conditionally renders either the login form or the main application interface.
+
+### Restaurant Menu Browsing
+
+Users can browse available restaurants and their menus:
+- A dropdown selector displays all available restaurants
+- Selecting a restaurant loads and displays its menu items
+- Each menu item shows:
+  - Food image
+  - Item name
+  - Price
+  - Add to cart button
+
+The menu items are displayed in a responsive grid layout that adapts to different screen sizes.
+
+### Shopping Cart
+
+The shopping cart functionality allows users to:
+- Add items to cart by clicking the "+" button on menu items
+- View all items in the cart with their quantities
+- See the total price of all items
+- Access the cart via a drawer component that slides in from the right
+
+The cart data is fetched from the backend when the drawer is opened, ensuring it always displays the current state.
+
+### Order Checkout
+
+Users can complete their orders through the checkout process:
+- Click the "Checkout" button in the cart drawer
+- The system processes the order through the backend API
+- Upon successful checkout, the cart is cleared and a success message is displayed
+- The cart drawer automatically closes after checkout
+
+**Note**: Payment integration is not implemented in the current version. The checkout process only confirms the order without processing actual payment.
+
 ## Tech Stack
 
 - React 19.2.3
@@ -77,11 +121,17 @@ src/
 
 ## Usage
 
-1. Register a new account or login
+### Test Account
+
+A default test account is available for quick access:
+
+- **Email**: `foo@mail.com`
+- **Password**: `123456`
+
+### User Flow
+
+1. Register a new account or login with the test account
 2. Select a restaurant from the dropdown
 3. Browse menu items and add to cart
 4. View cart and checkout
 
-## License
-
-Private
