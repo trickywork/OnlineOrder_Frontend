@@ -119,6 +119,35 @@ src/
 - `npm test` - Run tests
 - `npm run build` - Build for production
 
+## Deployment Notes
+
+The frontend is kept as a separate GitHub repo for development history. The low-cost Cloud Run demo is currently served by the backend repo after a production React build is copied into `OnlineOrder_Backend/src/main/resources/public`.
+
+Current deployed backend+frontend service:
+
+```text
+https://onlineorder-gb7rmueyna-uc.a.run.app
+```
+
+Custom domain mapping:
+
+```text
+onlineorder.junliu.dev
+```
+
+The custom domain is configured in Cloud Run and Cloudflare, but Google-managed certificate provisioning can take time.
+
+## Backend Pairing
+
+Use this frontend with:
+
+```text
+/Users/junliu/git_repo/OnlineOrder_Backend
+https://github.com/trickywork/OnlineOrder_Backend
+```
+
+For local development, keep the backend running at `http://localhost:8080` because `package.json` proxies API requests there.
+
 ## Usage
 
 ### Test Account
@@ -134,4 +163,3 @@ A default test account is available for quick access:
 2. Select a restaurant from the dropdown
 3. Browse menu items and add to cart
 4. View cart and checkout
-
