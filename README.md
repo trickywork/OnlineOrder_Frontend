@@ -65,7 +65,7 @@ Users can complete their orders through the checkout process:
 
 - Node.js 14+
 - npm or yarn
-- Backend API running on `http://localhost:8080`
+- Backend API running on `http://localhost:8081`
 
 ### Installation
 
@@ -77,14 +77,14 @@ npm install
 npm start
 ```
 
-The app will open at `http://localhost:3000`.
+The app will open at `http://localhost:3000` by default, or `http://localhost:3002` when started by the portfolio local stack.
 
 ### Configuration
 
 The backend API proxy is configured in `package.json`:
 
 ```json
-"proxy": "http://localhost:8080"
+"proxy": "http://localhost:8081"
 ```
 
 Update this if your backend runs on a different port.
@@ -148,7 +148,7 @@ Use this frontend with:
 https://github.com/trickywork/OnlineOrder_Backend
 ```
 
-For local development, keep the backend running at `http://localhost:8080` because `package.json` proxies API requests there.
+For local development, keep the backend running at `http://localhost:8081` because `package.json` proxies API requests there.
 
 ## Usage
 

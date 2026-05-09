@@ -27,20 +27,20 @@ The source code calls relative API paths such as:
 During local development, Create React App forwards those requests using the proxy in `package.json`:
 
 ```json
-"proxy": "http://localhost:8080"
+"proxy": "http://localhost:8081"
 ```
 
 So the local startup order is:
 
-1. Start `OnlineOrder_Backend` on `http://localhost:8080`.
-2. Start this frontend on `http://localhost:3000`.
+1. Start `OnlineOrder_Backend` on `http://localhost:8081`.
+2. Start this frontend on `http://localhost:3002` when running the full portfolio stack.
 
 ## Local Environment
 
 `.env.example` is intentionally minimal:
 
 ```env
-PORT=3000
+PORT=3002
 ```
 
 The effective backend URL is the `proxy` field in `package.json`, not an env var.
@@ -49,7 +49,7 @@ The effective backend URL is the `proxy` field in `package.json`, not an env var
 
 ```bash
 cd /Users/junliu/git_repo/OnlineOrder_Backend
-SPRING_PROFILES_ACTIVE=demo ./gradlew bootRun
+PORT=8081 SPRING_PROFILES_ACTIVE=demo ./gradlew bootRun
 ```
 
 In another terminal:
@@ -57,13 +57,13 @@ In another terminal:
 ```bash
 cd /Users/junliu/git_repo/OnlineOrder_Frontend
 npm install
-npm start
+PORT=3002 npm start
 ```
 
 Open:
 
 ```text
-http://localhost:3000
+http://localhost:3002
 ```
 
 ## Production Build Handoff
