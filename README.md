@@ -8,7 +8,7 @@ The production portfolio demo is served by the backend Cloud Run service:
 
 - Portfolio URL: `https://onlineorder.junliu.dev`
 - Cloud Run service: `onlineorder`
-- Cloud Run URL: `https://onlineorder-888561484971.us-central1.run.app`
+- Cloud Run URL: `https://onlineorder-gb7rmueyna-uc.a.run.app`
 
 This frontend repo remains separate so frontend development history is clear. For low-cost deployment, a production build is copied into the backend repo and served from Spring Boot.
 
