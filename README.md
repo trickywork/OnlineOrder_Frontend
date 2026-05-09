@@ -89,6 +89,8 @@ The backend API proxy is configured in `package.json`:
 
 Update this if your backend runs on a different port.
 
+Non-code setup is documented in `docs/configuration.md`, including the backend pairing, local proxy, production build handoff, and the fact that this repo has no database.
+
 ## Project Structure
 
 ```
