@@ -9,7 +9,7 @@ This is a Create React App frontend. It is kept in a separate GitHub repo for de
 The current low-cost deployed portfolio version is served by the backend repo after a production build is copied into:
 
 ```text
-/Users/junliu/git_repo/OnlineOrder_Backend/src/main/resources/public
+../OnlineOrder_Backend/src/main/resources/public
 ```
 
 This frontend repo does not have its own database.
@@ -48,14 +48,14 @@ The effective backend URL is the `proxy` field in `package.json`, not an env var
 ## Local Startup
 
 ```bash
-cd /Users/junliu/git_repo/OnlineOrder_Backend
+cd OnlineOrder_Backend
 PORT=8081 SPRING_PROFILES_ACTIVE=demo ./gradlew bootRun
 ```
 
 In another terminal:
 
 ```bash
-cd /Users/junliu/git_repo/OnlineOrder_Frontend
+cd OnlineOrder_Frontend
 npm install
 PORT=3002 npm start
 ```
@@ -71,10 +71,10 @@ http://localhost:3002
 When the frontend changes and you want the single low-cost Cloud Run service to show the new UI:
 
 ```bash
-cd /Users/junliu/git_repo/OnlineOrder_Frontend
+cd OnlineOrder_Frontend
 npm run build
-rm -rf /Users/junliu/git_repo/OnlineOrder_Backend/src/main/resources/public
-cp -R build /Users/junliu/git_repo/OnlineOrder_Backend/src/main/resources/public
+rm -rf ../OnlineOrder_Backend/src/main/resources/public
+cp -R build ../OnlineOrder_Backend/src/main/resources/public
 ```
 
 Then commit and push the backend repo so the `onlineorder-main-deploy` trigger redeploys the combined service.

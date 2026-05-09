@@ -1,13 +1,15 @@
 // User login API call
 export const login = (credentials) => {
-  // Build login URL with username and password as query parameters
-  const loginUrl = `/login?username=${credentials.username}&password=${credentials.password}`;
+  const formBody = new URLSearchParams();
+  formBody.set("username", credentials.username);
+  formBody.set("password", credentials.password);
 
-  return fetch(loginUrl, {
+  return fetch("/login", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
+    body: formBody,
   }).then(async (response) => {
     // Check if response status indicates an error
     if (response.status < 200 || response.status >= 300) {
@@ -128,5 +130,4 @@ export const addItemToCart = async (itemId) => {
   await response.text();
   return;
 };
-
 

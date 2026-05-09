@@ -1,5 +1,7 @@
 # Online Order Frontend
 
+[![CI](https://github.com/trickywork/OnlineOrder_Frontend/actions/workflows/ci.yml/badge.svg)](https://github.com/trickywork/OnlineOrder_Frontend/actions/workflows/ci.yml)
+
 React frontend for the Online Order portfolio project. It provides the customer-facing ordering experience: authentication, restaurant/menu browsing, cart management, and checkout.
 
 ## Live Demo
@@ -60,14 +62,14 @@ npm install
 Start the backend first:
 
 ```bash
-cd /Users/junliu/git_repo/OnlineOrder_Backend
+cd OnlineOrder_Backend
 SPRING_PROFILES_ACTIVE=demo PORT=8081 ./gradlew bootRun
 ```
 
 Start the frontend:
 
 ```bash
-cd /Users/junliu/git_repo/OnlineOrder_Frontend
+cd OnlineOrder_Frontend
 npm start
 ```
 
@@ -125,7 +127,7 @@ npm run build
 The `build/` output can be copied to the backend repo:
 
 ```text
-/Users/junliu/git_repo/OnlineOrder_Backend/src/main/resources/public
+../OnlineOrder_Backend/src/main/resources/public
 ```
 
 ## Tests
