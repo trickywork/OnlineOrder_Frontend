@@ -1,167 +1,154 @@
 # Online Order Frontend
 
-Frontend application for Jun's Restaurant online ordering system built with React and Ant Design.
+React frontend for the Online Order portfolio project. It provides the customer-facing ordering experience: authentication, restaurant/menu browsing, cart management, and checkout.
 
-## Features
+## Live Demo
 
-- User authentication (login/signup)
-- Restaurant menu browsing
-- Shopping cart management
-- Order checkout
+The production portfolio demo is served by the backend Cloud Run service:
 
-## Feature Details
+- Portfolio URL: `https://onlineorder.junliu.dev`
+- Cloud Run service: `onlineorder`
+- Cloud Run URL: `https://onlineorder-888561484971.us-central1.run.app`
 
-### User Authentication
-
-The app supports user registration and login. New users can create an account by providing:
-- Email address
-- Password
-- First name and last name
-
-Registered users can log in using their username and password. The authentication state is managed in the main App component, which conditionally renders either the login form or the main application interface.
-
-### Restaurant Menu Browsing
-
-Users can browse available restaurants and their menus:
-- A dropdown selector displays all available restaurants
-- Selecting a restaurant loads and displays its menu items
-- Each menu item shows:
-  - Food image
-  - Item name
-  - Price
-  - Add to cart button
-
-The menu items are displayed in a responsive grid layout that adapts to different screen sizes.
-
-### Shopping Cart
-
-The shopping cart functionality allows users to:
-- Add items to cart by clicking the "+" button on menu items
-- View all items in the cart with their quantities
-- See the total price of all items
-- Access the cart via a drawer component that slides in from the right
-
-The cart data is fetched from the backend when the drawer is opened, ensuring it always displays the current state.
-
-### Order Checkout
-
-Users can complete their orders through the checkout process:
-- Click the "Checkout" button in the cart drawer
-- The system processes the order through the backend API
-- Upon successful checkout, the cart is cleared and a success message is displayed
-- The cart drawer automatically closes after checkout
-
-**Note**: Payment integration is not implemented in the current version. The checkout process only confirms the order without processing actual payment.
+This frontend repo remains separate so frontend development history is clear. For low-cost deployment, a production build is copied into the backend repo and served from Spring Boot.
 
 ## Tech Stack
 
-- React 19.2.3
-- Ant Design 4.24.16
+- React 19
 - Create React App
+- Ant Design 4
+- Axios/fetch-style API helpers through `src/utils.js`
+- Backend pairing: Spring Boot API in `OnlineOrder_Backend`
 
-## Getting Started
+## Project Structure
 
-### Prerequisites
+```text
+OnlineOrder_Frontend/
+  src/
+    App.js
+    index.js
+    utils.js
+    components/
+      FoodList.js
+      LoginForm.js
+      MyCart.js
+      SignupForm.js
+  public/
+  docs/
+    configuration.md
+  package.json
+```
 
-- Node.js 14+
-- npm or yarn
-- Backend API running on `http://localhost:8081`
+## Features
 
-### Installation
+- Login and signup screens.
+- Restaurant dropdown.
+- Menu item grid with names, prices, images, and add-to-cart buttons.
+- Cart drawer with item quantities and total price.
+- Checkout flow that clears the cart after a successful backend response.
+
+Payment is intentionally not implemented. Checkout confirms the order in the demo backend.
+
+## Local Development
+
+Install dependencies:
 
 ```bash
-# Install dependencies
 npm install
+```
 
-# Start development server
+Start the backend first:
+
+```bash
+cd /Users/junliu/git_repo/OnlineOrder_Backend
+SPRING_PROFILES_ACTIVE=demo PORT=8081 ./gradlew bootRun
+```
+
+Start the frontend:
+
+```bash
+cd /Users/junliu/git_repo/OnlineOrder_Frontend
 npm start
 ```
 
-The app will open at `http://localhost:3000` by default, or `http://localhost:3002` when started by the portfolio local stack.
+Expected local URLs:
 
-### Configuration
+```text
+Frontend: http://localhost:3000
+Backend:  http://localhost:8081
+```
 
-The backend API proxy is configured in `package.json`:
+The frontend dev server proxies API requests to the backend through `package.json`:
 
 ```json
 "proxy": "http://localhost:8081"
 ```
 
-Update this if your backend runs on a different port.
+If your backend runs on another port, update the proxy or start Spring Boot with `PORT=8081`.
 
-Non-code setup is documented in `docs/configuration.md`, including the backend pairing, local proxy, production build handoff, and the fact that this repo has no database.
+## How To Use
 
-## Project Structure
+1. Open the frontend.
+2. Register a user or log in with a seeded account.
+3. Select a restaurant.
+4. Add menu items to the cart.
+5. Open the cart drawer.
+6. Click checkout.
 
+Expected result:
+
+- The restaurant selector loads from the backend.
+- Menu cards render for the selected restaurant.
+- Cart total updates after adding items.
+- Checkout succeeds and clears the cart.
+
+## API Contract
+
+The frontend expects these backend endpoints:
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `POST` | `/login` | User login. |
+| `POST` | `/signup` | User registration. |
+| `GET` | `/restaurants/menu` | Restaurant list. |
+| `GET` | `/restaurant/{restId}/menu` | Menu for one restaurant. |
+| `GET` | `/cart` | Current cart. |
+| `POST` | `/cart` | Add item to cart. |
+| `POST` | `/cart/checkout` | Checkout current cart. |
+
+## Build
+
+```bash
+npm run build
 ```
-src/
-├── components/
-│   ├── FoodList.js      # Menu display component
-│   ├── LoginForm.js     # Login form
-│   ├── MyCart.js        # Shopping cart
-│   └── SignupForm.js    # Registration form
-├── utils.js             # API utilities
-├── App.js               # Main app component
-└── index.js             # Entry point
+
+The `build/` output can be copied to the backend repo:
+
+```text
+/Users/junliu/git_repo/OnlineOrder_Backend/src/main/resources/public
 ```
 
-## API Endpoints
+## Tests
 
-- `POST /login` - User login
-- `POST /signup` - User registration
-- `GET /restaurants/menu` - Get restaurants list
-- `GET /restaurant/:restId/menu` - Get restaurant menu
-- `GET /cart` - Get cart data
-- `POST /cart` - Add item to cart
-- `POST /cart/checkout` - Checkout
-
-## Available Scripts
-
-- `npm start` - Start dev server
-- `npm test` - Run tests
-- `npm run build` - Build for production
+```bash
+npm test
+```
 
 ## Deployment Notes
 
-The frontend is kept as a separate GitHub repo for development history. The low-cost Cloud Run demo is currently served by the backend repo after a production React build is copied into `OnlineOrder_Backend/src/main/resources/public`.
+This repo is not deployed as a separate Cloud Run service right now. The current cost-conscious setup is:
 
-Current deployed backend+frontend service:
+1. Build this React app.
+2. Copy the static build into the backend repo.
+3. Deploy one Spring Boot container.
+4. Use `onlineorder.junliu.dev` for the complete app.
 
-```text
-https://onlineorder-gb7rmueyna-uc.a.run.app
-```
+For a larger production setup, this frontend could also be deployed separately to Cloud Run, Cloudflare Pages, Firebase Hosting, or another static host.
 
-Custom domain mapping:
+## Additional Notes
 
-```text
-onlineorder.junliu.dev
-```
-
-The custom domain is configured in Cloud Run and Cloudflare, but Google-managed certificate provisioning can take time.
-
-## Backend Pairing
-
-Use this frontend with:
+Non-code configuration notes are in:
 
 ```text
-/Users/junliu/git_repo/OnlineOrder_Backend
-https://github.com/trickywork/OnlineOrder_Backend
+docs/configuration.md
 ```
-
-For local development, keep the backend running at `http://localhost:8081` because `package.json` proxies API requests there.
-
-## Usage
-
-### Test Account
-
-A default test account is available for quick access:
-
-- **Email**: `foo@mail.com`
-- **Password**: `123456`
-
-### User Flow
-
-1. Register a new account or login with the test account
-2. Select a restaurant from the dropdown
-3. Browse menu items and add to cart
-4. View cart and checkout
